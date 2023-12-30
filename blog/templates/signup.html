@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class=" col-sm-4">
+    <h3 class="text-white my-5">signup Page</h3>
+ 
+<form method="POST" novalidate>
+    {% csrf_token %}
+    
+     {% comment %} {% for mess in messages %}
+    {{mess}}
+    {% endfor %} {% endcomment %}
+
+
+    {% if messages %}
+  {% for mess in messages %}
+  <p {% if mess.tags %} class="p-3 mb-2 bg-success text-white{{ mess.tags }} mb-5"{% endif %}>
+  {{mess}}</p>
+  {% endfor %}
+  {% endif %}
+
+
+
+     {% comment %} {% if form.non_field_errors %}
+        {% for error in form.non_field_errors %}
+            <p class="alert-alert-danger">{{ error }}</p>
+        {% endfor %}
+     {% endif %} {% endcomment %}
+
+
+
+    {% if form.non_field_errors %}
+        {% for error in form.non_field_errors %}
+            <p class="alert-alert-danger">{{ error }}</p>
+        {% endfor %}
+     {% endif %}
+
+    {% for fm in form %}
+        <div class="form-group">
+        {{fm.label_tag}} {{fm}} <small class="text-warning"> {{fm.errors|striptags}} </small>         
+        </div>
+    {% endfor %}
+    <input type="submit" value="submit" class="tn btn-primary">
+    
+    
+ </form>
+
+
+</div>
+{% endblock content %}  
